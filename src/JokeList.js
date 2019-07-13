@@ -8,11 +8,22 @@ export default class JokeList extends Component {
   static defaultProps = {
     numJokesToFetch: 10
   };
-  state = {
-    jokes: []
-  };
-  async componentDidMount() {
+  constructor(props) {
+    super(props);
+    this.state = {
+      jokes: JSON.parse(window.localStorage.getItem("jokes") || "[]")
+    };
+    this.handleClick = this.handleClick.bind(this);
+    this.getJokes = this.getJokes.bind(this);
+    this.handleVote = this.handleVote.bind(this);
+  }
+  componentDidMount() {
     //load jokes
+    if (this.state.jokes.length === 0) {
+      this.getJokes();
+    }
+  }
+  async getJokes() {
     let jokes = [];
     const url = "https://icanhazdadjoke.com/";
     while (jokes.length < this.props.numJokesToFetch) {
@@ -21,16 +32,28 @@ export default class JokeList extends Component {
       });
       jokes.push({ id: uuid(), text: res.data.joke, votes: 0 });
     }
-    this.setState({
-      jokes
-    });
+    this.setState(
+      prevState => ({
+        jokes: [...prevState.jokes, ...jokes]
+      }),
+      () =>
+        window.localStorage.setItem("jokes", JSON.stringify(this.state.jokes))
+    );
   }
   handleVote = (id, delta) => {
-    this.setState(prevState => ({
-      jokes: prevState.jokes.map(joke =>
-        joke.id === id ? { ...joke, votes: joke.votes + delta } : joke
-      )
-    }));
+    this.setState(
+      prevState => ({
+        jokes: prevState.jokes.map(joke =>
+          joke.id === id ? { ...joke, votes: joke.votes + delta } : joke
+        )
+      }),
+      () =>
+        window.localStorage.setItem("jokes", JSON.stringify(this.state.jokes))
+    );
+  };
+
+  handleClick = () => {
+    this.getJokes();
   };
 
   render() {
@@ -44,7 +67,9 @@ export default class JokeList extends Component {
             alt="laughing emoji"
             src="https://assets.dryicons.com/uploads/icon/svg/8927/0eb14c71-38f2-433a-bfc8-23d9c99b3647.svg"
           />
-          <button className="JokeList-getmore">New Jokes</button>
+          <button onClick={this.handleClick} className="JokeList-getmore">
+            New Jokes
+          </button>
         </div>
 
         <div className="JokeList-jokes">
