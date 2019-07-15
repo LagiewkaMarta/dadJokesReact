@@ -17,7 +17,7 @@ export default class JokeList extends Component {
     this.handleClick = this.handleClick.bind(this);
     this.getJokes = this.getJokes.bind(this);
     this.handleVote = this.handleVote.bind(this);
-    this.alreadySeenJokes = new Set(this.state.jokes.map(j => j.text))
+    this.alreadySeenJokes = new Set(this.state.jokes.map(j => j.text));
   }
   componentDidMount() {
     //load jokes
@@ -26,33 +26,32 @@ export default class JokeList extends Component {
     }
   }
   async getJokes() {
-    try{
-    let jokes = [];
-    const url = "https://icanhazdadjoke.com/";
-    while (jokes.length < this.props.numJokesToFetch) {
-      const res = await axios.get(url, {
-        headers: { Accept: "application/json" }
-      });
-      if(!this.alreadySeenJokes.has(res.data.joke)){
-        jokes.push({ id: uuid(), text: res.data.joke, votes: 0 });
-      } else {
-        console.log("found a duplicate", res.data.joke)
+    try {
+      let jokes = [];
+      const url = "https://icanhazdadjoke.com/";
+      while (jokes.length < this.props.numJokesToFetch) {
+        const res = await axios.get(url, {
+          headers: { Accept: "application/json" }
+        });
+        if (!this.alreadySeenJokes.has(res.data.joke)) {
+          jokes.push({ id: uuid(), text: res.data.joke, votes: 0 });
+        } else {
+          console.log("found a duplicate", res.data.joke);
+        }
       }
-      
-    }
-    this.setState(
-      prevState => ({
-        jokes: [...prevState.jokes, ...jokes],
-        loading: false
-      }),
-      () =>
-        window.localStorage.setItem("jokes", JSON.stringify(this.state.jokes))
-    );
-    } catch(error) {
+      this.setState(
+        prevState => ({
+          jokes: [...prevState.jokes, ...jokes],
+          loading: false
+        }),
+        () =>
+          window.localStorage.setItem("jokes", JSON.stringify(this.state.jokes))
+      );
+    } catch (error) {
       alert(error);
       this.setState({
         loading: false
-      })
+      });
     }
   }
   handleVote = (id, delta) => {
@@ -68,20 +67,19 @@ export default class JokeList extends Component {
   };
 
   handleClick = () => {
-    this.setState({loading: true}, this.getJokes);
-    
+    this.setState({ loading: true }, this.getJokes);
   };
 
   render() {
-    if(this.state.loading){
+    if (this.state.loading) {
       return (
         <div className="JokeList-spinner">
-          <i className="far fa-8x fa-laugh fa-spin"></i>
+          <i className="far fa-8x fa-laugh fa-spin" />
           <p className="JokeList-title">Loading...</p>
         </div>
-      )
+      );
     }
-    let jokes = this.state.jokes.sort((a,b) => b.votes - a.votes)
+    let jokes = this.state.jokes.sort((a, b) => b.votes - a.votes);
     return (
       <div className="JokeList">
         <div className="JokeList-sidebar">

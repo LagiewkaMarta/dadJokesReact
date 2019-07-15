@@ -1,80 +1,116 @@
 .JokeList {
-    display: flex;
-    width: 80%;
-    height: 80vh;
+  display: flex;
+  width: 80%;
+  height: 80vh;
 }
 
-.JokeList-sidebar{
-    background-color: #9575cd;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 30%;
-    text-align: center;
-    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.1),
+.JokeList-sidebar {
+  background-color: #9575cd;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 30%;
+  text-align: center;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.1),
     inset 0 0 25px #7e57c2;
-    z-index: 1;
+  z-index: 1;
 }
 
 .JokeList-title {
-    font-size: 4rem;
-    margin: 2rem;
-    color: #fff;
-    font-weight: 300;
-    letter-spacing: .6rem;
+  font-size: 4rem;
+  margin: 2rem;
+  color: #fff;
+  font-weight: 300;
+  letter-spacing: 0.6rem;
+  /* display: none; */
 }
 
 .JokeList-title span {
-font-weight: 700;
-letter-spacing: 0;
+  font-weight: 700;
+  letter-spacing: 0;
 }
 .JokeList-sidebar img {
-    width: 50%;
-    border-radius: 50%;
-    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.1);
+  width: 50%;
+  border-radius: 50%;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.1);
 }
 
 .JokeList-jokes {
-    height: 90%;
-    background-color: #fff;
-    align-self: center;
-    width: 70%;
-    overflow: scroll;
-    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.1);
+  height: 90%;
+  background-color: #fff;
+  align-self: center;
+  width: 70%;
+  overflow: scroll;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.1);
 }
 
 .JokeList-spinner {
-    color: #fff;
-    text-align: center;
+  color: #fff;
+  text-align: center;
 }
 
 .JokeList-getmore {
-    font-size: 1.5rem;
-    width: 50%;
-    border-radius: 2rem;
-    padding: 1rem 2rem;
-    color: #fff;
-    font-weight: 700;
-    border: none;
-    outline: none;
-    margin: 2rem;
-    cursor: pointer;
-    transition: .8s cubic-bezier(0.2, 1, 0.2, 1);
-    word-spacing: .5rem;
-    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.1);
-    background-image: linear-gradient(
-        135deg,
-        rgba(179,229,252,1) 0%,
-        rgba(179,229,252,1) 50%,
-        rgba(240,98,146,1) 50%,
-        rgba(240,98,146,1) 100%
-
-    );
+  font-size: 1.5rem;
+  width: 50%;
+  border-radius: 2rem;
+  padding: 1rem 2rem;
+  color: #fff;
+  font-weight: 700;
+  border: none;
+  outline: none;
+  margin: 2rem;
+  cursor: pointer;
+  transition: 0.8s cubic-bezier(0.2, 1, 0.2, 1);
+  word-spacing: 0.5rem;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.1);
+  background-image: linear-gradient(
+    135deg,
+    rgba(179, 229, 252, 1) 0%,
+    rgba(179, 229, 252, 1) 50%,
+    rgba(240, 98, 146, 1) 50%,
+    rgba(240, 98, 146, 1) 100%
+  );
 }
 
 .JokeList-getmore:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+}
 
+@media (max-width: 900px) {
+  .JokeList {
+    margin-top: 10rem;
+  }
+  .JokeList-title {
+    /* display: none; */
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    /* background-color: #9575cd; */
+    font-size: 3.5rem;
+  }
+  .JokeList-getmore {
+    font-size: 1.4rem;
+    padding: 1rem 1.6rem;
+    margin-top: 10rem;
+    background-image: linear-gradient(
+      0deg,
+      rgba(179, 229, 252, 1) 0%,
+      rgba(179, 229, 252, 1) 50%,
+      rgba(240, 98, 146, 1) 50%,
+      rgba(240, 98, 146, 1) 100%
+    );
+  }
+
+  .JokeList-sidebar img {
+    width: 80%;
+  }
+}
+
+@media (max-width: 1050px) {
+  .JokeList-getmore {
+    padding: 0.7rem 1.2rem;
+  }
 }
